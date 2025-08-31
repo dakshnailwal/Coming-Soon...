@@ -1,38 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+!-- Correct for same folder -->
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What Waits</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
     
-   
- <!-- Correct for same folder -->
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
-
+ 
 </head>
-
 <body>
+
     <div class="content">
-        <h1 class="primary-line">The silence is almost over...</h1>
-
-        <p class="secondary-line">Coming Soon...</p>
-    
-        <form class="email-form">
-            <input type="email" id="email-input" placeholder="Enter your email" required>
-
-            <button type="submit">Tell Me First</button>
-        </form>
+        <h1 class="primary-line"><i>Coming soon...</i></h1>
     </div>
-    
+
     <footer>
-        <p>© 2025 Daksh Nailwal</p>
+        <button class="cta-button" onclick="showModal()">Notify Me</button>
     </footer>
+
+    <p class="copyright">@ Daksh Nailwal 2025</p>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <form id="modal-form">
+                <input type="email" id="modal-email" placeholder="Enter your email" required>
+                <button type="submit" class="cta-button">Tell Me First</button>
+            </form>
+        </div>
+    </div>
+
 
 </body>
 </html>
+
+
 
