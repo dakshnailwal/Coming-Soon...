@@ -81,23 +81,28 @@
     const modalOverlay = document.querySelector('.modal-overlay');
     const modalForm = document.getElementById('modal-form');
 
-    function showModal() { modalOverlay.classList.add('visible'); }
+    function showModal() { 
+      modalOverlay.classList.add('visible'); 
+    }
 
     modalForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const emailInput = document.getElementById('modal-email');
       const userEmail = emailInput.value;
 
-      // Send to Formspree
-      await fetch("https://formspree.io/f/mwpnbvnb", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: userEmail })
-      });
+      try {
+        await fetch("https://formspree.io/f/mwpnbvnb", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ email: userEmail })
+        });
 
-      alert(`A signal has been sent to ${userEmail}. Stay close.`);
-      modalOverlay.classList.remove('visible');
-      emailInput.value = '';
+        alert(`A signal has been sent to ${userEmail}. Stay close.`);
+        modalOverlay.classList.remove('visible');
+        emailInput.value = '';
+      } catch (error) {
+        alert("Something went wrong. Try again.");
+      }
     });
 
     modalOverlay.addEventListener('click', (e) => {
