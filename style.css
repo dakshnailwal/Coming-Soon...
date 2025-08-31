@@ -1,356 +1,165 @@
 
-/* Base and Font Styles */
-
-:root {
-
-    --dark-color: #0d0d0d;
-
-    --light-color: #f0f0f0;
-
-    --muted-color: #a0a0a0;
-
-}
-
-
-
-* {
-
-    margin: 0;
-
-    padding: 0;
-
-    box-sizing: border-box;
-
-}
-
-
-
-body {
-
-    background-color: var(--dark-color);
-
-    color: var(--light-color);
-
-    font-family: 'Raleway', sans-serif;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    height: 100vh;
-
-    text-align: center;
-
-    overflow: hidden;
-
-    position: relative;
-
-}
-
-
-
-/* Abstract Reality Folding Animation */
-
-body::after {
-
-    content: '';
-
-    position: absolute;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background-image:
-
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-
-    background-size: 100px 100px;
-
-    opacity: 0.5;
-
-    z-index: -1;
-
-    transform: perspective(800px) rotateX(60deg) scale(1.5);
-
-    animation: foldReality 40s linear infinite;
-
-}
-
-
-
-@keyframes foldReality {
-
-    0% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(0) translateY(0); }
-
-    100% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(-200px) translateY(-200px); }
-
-}
-
-
-
-/* General Fade-in Animation */
-
-@keyframes fade-in {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(20px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
-}
-
-
-.content {
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 0 20px;
-  /* Corrected: Use margin-top to push the content down from the top. */
-  margin-top: 5vh; 
-}
-
-
-/* Text Elements with Fade-in */
-
-.primary-line {
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-weight: 700;
-
-    font-size: clamp(3rem, 8vw, 7rem);
-
-    letter-spacing: 0.05em;
-
-    margin-bottom: 10px;
-
-    opacity: 0;
-
-    animation: fade-in 1.5s ease-out forwards;
-
-}
-
-
-
-.secondary-line {
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-style: italic;
-
-    font-weight: 300;
-
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-
-    color: var(--muted-color);
-
-    margin-bottom: 40px;
-
-    opacity: 0;
-
-    animation: fade-in 1.5s ease-out forwards;
-
-    animation-delay: 0.5s;
-
-}
-
-
-
-/* CTA Button */
-
-.cta-button {
-
-    padding: 10px 20px;
-
-    border: 1px solid var(--light-color);
-
-    background: transparent;
-
-    color: var(--light-color);
-
-    font-size: 0.9rem;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.1em;
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-
-    border-radius: 8px;
-
-}
-
-
-
-.cta-button:hover {
-
-    background: var(--light-color);
-
-    color: var(--dark-color);
-
-}
-
-
-
-/* Footer button slightly raised */
-
+        /* Base and Font Styles */
+        :root {
+            --dark-color: #0d0d0d;
+            --light-color: #f0f0f0;
+            --muted-color: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            font-family: 'Raleway', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 100px 100px;
+            opacity: 0.5;
+            z-index: -1;
+            transform: perspective(800px) rotateX(60deg) scale(1.5);
+            animation: foldReality 40s linear infinite;
+        }
+
+        @keyframes foldReality {
+            0% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(0) translateY(0); }
+            100% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(-200px) translateY(-200px); }
+        }
+
+        /* Fade-in animation */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content {
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        .primary-line {
+            font-family: 'Cormorant Garamond', serif; 
+            font-weight: 700; 
+            font-size: clamp(3rem, 8vw, 7rem); 
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            opacity: 0; 
+            animation: fade-in 1.5s ease-out forwards;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            padding: 10px 20px;
+            border: 1px solid var(--light-color);
+            background: transparent;
+            color: var(--light-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .cta-button:hover {
+            background: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        /* Footer with raised button */
 footer {
-
     padding: 20px;
-
     opacity: 0;
-
     animation: fade-in 1.5s ease-out forwards;
-
     animation-delay: 1s;
-
-    margin-bottom: 300px; /* Moves Notify Me button slightly up */
-
+    margin-bottom: 30vh; /* 🔥 raised dynamically */
 }
 
 
-
-/* Copyright text */
-
-.copyright {
-
-    position: absolute;
-
-    bottom: 10px;
-
-    font-size: 0.8rem;
-
-    color: var(--muted-color);
-
-    opacity: 0.7;
-
-}
-
-
-
-/* Modal Popup Styles */
-
-.modal-overlay {
-
-    position: fixed;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background-color: rgba(0, 0, 0, 0.8);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition: opacity 0.3s ease-in-out;
-
-    z-index: 100;
-
-}
-
-
-
-.modal-overlay.visible {
-
-    opacity: 1;
-
-    pointer-events: auto;
-
-}
-
-
-
-.modal {
-
-    background-color: var(--dark-color);
-
-    padding: 25px;
-
-    border: 1px solid var(--light-color);
-
-    transform: scale(0.95);
-
-    transition: transform 0.3s ease-in-out;
-
-    border-radius: 8px;
-
-}
-
-
-
-.modal-overlay.visible .modal {
-
-    transform: scale(1);
-
-}
-
-
-
-.modal input {
-
-    width: 100%;
-
-    padding: 12px;
-
-    background: transparent;
-
-    border: 1px solid var(--light-color);
-
-    color: var(--light-color);
-
-    text-align: center;
-
-    margin-bottom: 15px;
-
-    border-radius: 8px;
-
-}
-
-
-
-.modal input::placeholder {
-
-    font-family: 'Raleway', sans-serif;
-
-    color: var(--muted-color);
-
-}
+        /* Copyright */
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8rem;
+            color: var(--muted-color);
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 100;
+        }
+        
+        .modal-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background-color: var(--dark-color);
+            padding: 25px;
+            border: 1px solid var(--light-color);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+            border-radius: 8px;
+        }
+
+        .modal-overlay.visible .modal {
+            transform: scale(1);
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--light-color);
+            color: var(--light-color);
+            text-align: center;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        
+        .modal input::placeholder {
+            font-family: 'Raleway', sans-serif;
+            color: var(--muted-color);
+        }
