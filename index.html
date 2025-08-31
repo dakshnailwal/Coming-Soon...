@@ -36,7 +36,6 @@
             position: relative;
         }
 
-        /* Background Animation */
         body::after {
             content: '';
             position: absolute;
@@ -59,7 +58,6 @@
             100% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(-200px) translateY(-200px); }
         }
 
-        /* Fade-in animation */
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -85,7 +83,6 @@
             animation: fade-in 1.5s ease-out forwards;
         }
 
-        /* CTA Button */
         .cta-button {
             padding: 10px 20px;
             border: 1px solid var(--light-color);
@@ -104,17 +101,14 @@
             color: var(--dark-color);
         }
 
-        /* Footer with raised button */
-footer {
-    padding: 20px;
-    opacity: 0;
-    animation: fade-in 1.5s ease-out forwards;
-    animation-delay: 1s;
-    margin-bottom: 30vh; /* 🔥 raised dynamically */
-}
+        footer {
+            padding: 20px;
+            opacity: 0;
+            animation: fade-in 1.5s ease-out forwards;
+            animation-delay: 1s;
+            margin-bottom: 30vh;
+        }
 
-
-        /* Copyright */
         .copyright {
             position: absolute;
             bottom: 10px;
@@ -123,7 +117,6 @@ footer {
             opacity: 0.7;
         }
 
-        /* Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -181,21 +174,22 @@ footer {
         <h1 class="primary-line"><i>Coming soon...</i></h1>
     </div>
 
-  <footer>
-    <div class="button-wrapper">
-        <button class="cta-button" onclick="showModal()">Notify Me</button>
-    </div>
-</footer>
-
+    <footer>
+        <div class="button-wrapper">
+            <button class="cta-button" onclick="showModal()">Notify Me</button>
+        </div>
+    </footer>
 
     <p class="copyright">@ Daksh Nailwal 2025</p>
 
     <div class="modal-overlay">
         <div class="modal">
-            <form id="modal-form">
-                <input type="email" id="modal-email" placeholder="Enter your email" required>
+            <!-- Google Form submission -->
+            <form id="modal-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdC4oY9arg73GsDC6/formResponse" method="POST" target="hidden_iframe">
+                <input type="email" id="modal-email" name="entry.98858371" placeholder="Enter your email" required>
                 <button type="submit" class="cta-button">Tell Me First</button>
             </form>
+            <iframe name="hidden_iframe" style="display:none;"></iframe>
         </div>
     </div>
 
@@ -211,6 +205,10 @@ footer {
             e.preventDefault();
             const emailInput = document.getElementById('modal-email');
             const userEmail = emailInput.value;
+
+            // Submit form silently
+            modalForm.submit();
+
             alert(`A signal has been sent to ${userEmail}. Stay close.`);
             modalOverlay.classList.remove('visible');
             emailInput.value = '';
@@ -223,4 +221,3 @@ footer {
         });
     </script>
 </body>
-</html>
