@@ -21,3 +21,4 @@
                 modalOverlay.classList.remove('visible');
             }
         });
+
