@@ -8,102 +8,105 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
     <style>
-        html, body {
+     :root {
+    --dark-color: #0d0d0d;
+    --light-color: #f0f0f0;
+    --muted-color: #a0a0a0;
+}
+
+* {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
+    box-sizing: border-box;
 }
-        :root {
-            --dark-color: #0d0d0d;
-            --light-color: #f0f0f0;
-            --muted-color: #a0a0a0;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+html, body {
+    width: 100%;
+    min-height: 100%;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
+}
 
-        body {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            font-family: 'Raleway', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Changed to center the content vertically */
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
+/* Background Animation */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 100px 100px;
+    opacity: 0.5;
+    z-index: -1;
+    transform: perspective(800px) rotateX(60deg) scale(1.5);
+    animation: foldReality 40s linear infinite;
+}
 
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 100px 100px;
-            opacity: 0.5;
-            z-index: -1;
-            transform: perspective(800px) rotateX(60deg) scale(1.5);
-            animation: foldReality 40s linear infinite;
-        }
+@keyframes foldReality {
+    0% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(0) translateY(0); }
+    100% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(-200px) translateY(-200px); }
+}
 
-        @keyframes foldReality {
-            0% {
-                transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(0) translateY(0);
-            }
-            100% {
-                transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(-200px) translateY(-200px);
-            }
-        }
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* Main Content */
+.content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
 
-        .content {
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-        }
+.primary-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 7rem);
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: fade-in 1.5s ease-out forwards;
+}
 
+/* Copyright */
+.copyright {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted-color);
+    opacity: 0.7;
+}
 
-        .primary-line {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-            font-size: clamp(3rem, 8vw, 7rem);
-            letter-spacing: 0.05em;
-            margin-bottom: 15px;
-            opacity: 0;
-            animation: fade-in 1.5s ease-out forwards;
-        }
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .primary-line {
+        font-size: clamp(2.5rem, 10vw, 5rem);
+    }
+}
 
-        /* Removed unnecessary footer and modal styles */
-        .copyright {
-            position: fixed;
-            bottom: 10px;
-            font-size: 0.8rem;
-            color: var(--muted-color);
-            opacity: 0.7;
-        }
+@media (max-width: 480px) {
+    .primary-line {
+        font-size: clamp(2rem, 12vw, 4rem);
+    }
+}
+
     </style>
     <script>
         const modalOverlay = document.querySelector('.modal-overlay');
@@ -136,6 +139,7 @@ modalOverlay.addEventListener('click', (e) => {
     <p class="copyright">@ Daksh Nailwal 2025</p>
 </body>
 </html>
+
 
 
 
