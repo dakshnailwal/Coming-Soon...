@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
     <style>
+        html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
         :root {
             --dark-color: #0d0d0d;
             --light-color: #f0f0f0;
@@ -28,7 +34,7 @@
             flex-direction: column;
             justify-content: center; /* Changed to center the content vertically */
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
             overflow: hidden;
             position: relative;
@@ -76,9 +82,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
             padding: 0 20px;
         }
+
 
         .primary-line {
             font-family: 'Cormorant Garamond', serif;
@@ -92,7 +98,7 @@
 
         /* Removed unnecessary footer and modal styles */
         .copyright {
-            position: absolute;
+            position: fixed;
             bottom: 10px;
             font-size: 0.8rem;
             color: var(--muted-color);
@@ -107,4 +113,5 @@
     <p class="copyright">@ Daksh Nailwal 2025</p>
 </body>
 </html>
+
 
