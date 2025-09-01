@@ -1,124 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Waits</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <style>
-     :root {
-    --dark-color: #0d0d0d;
-    --light-color: #f0f0f0;
-    --muted-color: #a0a0a0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    width: 100%;
-    min-height: 100%;
-    background-color: var(--dark-color);
-    color: var(--light-color);
-    font-family: 'Raleway', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow-x: hidden;
-    position: relative;
-}
-
-/* Background Animation */
-body::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 100px 100px;
-    opacity: 0.5;
-    z-index: -1;
-    transform: perspective(800px) rotateX(60deg) scale(1.5);
-    animation: foldReality 40s linear infinite;
-}
-
-@keyframes foldReality {
-    0% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(0) translateY(0); }
-    100% { transform: perspective(800px) rotateX(60deg) scale(1.5) translateX(-200px) translateY(-200px); }
-}
-
-@keyframes fade-in {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Main Content */
-.content {
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0 20px;
-}
-
-.primary-line {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-size: clamp(3rem, 8vw, 7rem);
-    letter-spacing: 0.05em;
-    margin-bottom: 15px;
-    opacity: 0;
-    animation: fade-in 1.5s ease-out forwards;
-}
-
-/* Copyright */
-.copyright {
-    position: fixed;
-    bottom: 10px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--muted-color);
-    opacity: 0.7;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .primary-line {
-        font-size: clamp(2.5rem, 10vw, 5rem);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Waits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-color: #0d0d0d;
+      --light-color: #f0f0f0;
+      --muted-color: #a0a0a0;
     }
-}
 
-@media (max-width: 480px) {
-    .primary-line {
-        font-size: clamp(2rem, 12vw, 4rem);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-}
 
-    </style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--dark-color);
+      color: var(--light-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
 
+    /* Subtle mystery dimension background */
+    .mystery-bg {
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 50%, #111 0%, #000 70%);
+      transform: rotateX(15deg) rotateY(25deg);
+      animation: fold-drift 20s ease-in-out infinite alternate;
+      z-index: -2;
+    }
+
+    @keyframes fold-drift {
+      0% {
+        transform: rotateX(15deg) rotateY(25deg) translate(-5%, -5%);
+      }
+      50% {
+        transform: rotateX(25deg) rotateY(15deg) translate(5%, 5%);
+      }
+      100% {
+        transform: rotateX(20deg) rotateY(20deg) translate(0%, 0%);
+      }
+    }
+
+    /* Dynamic starfield effect */
+    .stars {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      perspective: 1000px;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: star-fly 10s linear infinite;
+    }
+
+    @keyframes star-fly {
+      from {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+      }
+      to {
+        transform: translate3d(0, 0, 1000px);
+        opacity: 1;
+      }
+    }
+
+    /* You can adjust the number of stars by adding more lines below */
+    .star:nth-child(1) { top: 10%; left: 20%; width: 2px; height: 2px; animation-delay: 0s; }
+    .star:nth-child(2) { top: 80%; left: 70%; width: 3px; height: 3px; animation-delay: 1s; }
+    .star:nth-child(3) { top: 30%; left: 50%; width: 1px; height: 1px; animation-delay: 2s; }
+    .star:nth-child(4) { top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 3s; }
+    .star:nth-child(5) { top: 45%; left: 85%; width: 4px; height: 4px; animation-delay: 4s; }
+    /* Add more stars here for a denser effect */
+
+    .content {
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .primary-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 15px;
+      animation: fade-in 1.5s ease-out forwards;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    .copyright {
+      position: fixed;
+      bottom: 10px;
+      font-size: 0.8rem;
+      color: var(--muted-color);
+      opacity: 0.8;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
-    <div class="content">
-        <h1 class="primary-line"><i>Coming soon...</i></h1>
-    </div>
-    <p class="copyright">@ Daksh Nailwal 2025</p>
+  <div class="mystery-bg"></div>
+  <div class="stars">
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+  </div>
+
+  <div class="content">
+    <h1 class="primary-line"><i>Coming soon...</i></h1>
+  </div>
+
+  <p class="copyright">@ Daksh Nailwal 2025</p>
 </body>
 </html>
-
-
-
-
-
