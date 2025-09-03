@@ -1,150 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What Waits</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --dark-color: #0d0d0d;
-      --light-color: #f0f0f0;
-      --muted-color: #a0a0a0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Daksh Nailwal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --main-text-color: rgba(255, 255, 255, 0.85);
+            --check-color: rgba(255, 255, 255, 0.7);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            color: var(--main-text-color);
+            font-family: 'Playfair Display', serif;
+        }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Raleway', sans-serif;
-      background-color: var(--dark-color);
-      color: var(--light-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-    /* Subtle mystery dimension background */
-    .mystery-bg {
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 50% 50%, #111 0%, #000 70%);
-      transform: rotateX(15deg) rotateY(25deg);
-      animation: fold-drift 20s ease-in-out infinite alternate;
-      z-index: -2;
-    }
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
-    @keyframes fold-drift {
-      0% {
-        transform: rotateX(15deg) rotateY(25deg) translate(-5%, -5%);
-      }
-      50% {
-        transform: rotateX(25deg) rotateY(15deg) translate(5%, 5%);
-      }
-      100% {
-        transform: rotateX(20deg) rotateY(20deg) translate(0%, 0%);
-      }
-    }
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 10vw, 7rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
 
-    /* Dynamic starfield effect */
-    .stars {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-      perspective: 1000px;
-      z-index: -1;
-    }
+        .cta-button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--main-text-color);
+            padding: 10px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
 
-    .star {
-      position: absolute;
-      background-color: #fff;
-      border-radius: 50%;
-      animation: star-fly 10s linear infinite;
-    }
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
 
-    @keyframes star-fly {
-      from {
-        transform: translate3d(0, 0, 0);
-        opacity: 0;
-      }
-      to {
-        transform: translate3d(0, 0, 1000px);
-        opacity: 1;
-      }
-    }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
 
-    /* You can adjust the number of stars by adding more lines below */
-    .star:nth-child(1) { top: 10%; left: 20%; width: 2px; height: 2px; animation-delay: 0s; }
-    .star:nth-child(2) { top: 80%; left: 70%; width: 3px; height: 3px; animation-delay: 1s; }
-    .star:nth-child(3) { top: 30%; left: 50%; width: 1px; height: 1px; animation-delay: 2s; }
-    .star:nth-child(4) { top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 3s; }
-    .star:nth-child(5) { top: 45%; left: 85%; width: 4px; height: 4px; animation-delay: 4s; }
-    /* Add more stars here for a denser effect */
+        .modal-overlay.visible {
+            display: flex;
+            opacity: 1;
+        }
 
-    .content {
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 0 20px;
-    }
+        .modal-content {
+            background-color: transparent;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            max-width: 90%;
+            width: 350px;
+        }
 
-    .primary-line {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: clamp(3rem, 8vw, 7rem);
-      letter-spacing: 0.05em;
-      margin-bottom: 15px;
-      animation: fade-in 1.5s ease-out forwards;
-    }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
 
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
+        .close-button:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
 
-    .copyright {
-      position: fixed;
-      bottom: 10px;
-      font-size: 0.8rem;
-      color: var(--muted-color);
-      opacity: 0.8;
-      z-index: 1;
-    }
-  </style>
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .modal-content input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .modal-content button {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .modal-content button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .error-message {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .success-message {
+            display: none;
+        }
+
+        /* Checkmark Animation */
+        .checkmark {
+            width: 40px; /* Reduced size */
+            height: 40px; /* Reduced size */
+            border-radius: 50%;
+            display: block;
+            stroke-width: 3;
+            stroke: var(--check-color); /* Updated color */
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+            box-shadow: inset 0px 0px 0px var(--check-color); /* Updated color */
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s forwards;
+            transform-origin: 50% 50%;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 3;
+            stroke-miterlimit: 10;
+            stroke: var(--check-color); /* Updated color */
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 25px var(--check-color); /* Updated inset size */
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="mystery-bg"></div>
-  <div class="stars">
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-  </div>
 
-  <div class="content">
-    <h1 class="primary-line"><i>Coming soon...</i></h1>
-  </div>
+    <canvas id="bgCanvas"></canvas>
 
-  <p class="copyright">@ Daksh Nailwal 2025</p>
+    <div class="container">
+        <h1 class="main-title">Coming Soon...</h1>
+        <button class="cta-button" id="tellMeFirstBtn">Tell Me First</button>
+    </div>
+    
+    <!-- The Modal -->
+    <div id="emailModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalBtn">&times;</span>
+            <div id="formContainer">
+                <input type="email" id="emailInput" placeholder="Your email...">
+                <p id="errorMessage" class="error-message">Please enter a valid Gmail address.</p>
+                <button id="notifyMeBtn">Notify Me</button>
+            </div>
+            <div id="successMessage" class="success-message">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+
+            const maxDistance = 150;
+            const points = [];
+            const pointCount = 50;
+            let hue = 220;
+
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                points.length = 0;
+                for (let i = 0; i < pointCount; i++) {
+                    points.push(createPoint());
+                }
+            }
+
+            function createPoint() {
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.1,
+                    vy: (Math.random() - 0.5) * 0.1,
+                };
+            }
+
+            function drawLine(p1, p2, opacity) {
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = `hsla(${hue}, 100%, 80%, ${opacity})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+                ctx.fillRect(0, 0, width, height);
+                
+                hue = (hue + 0.05) % 360;
+
+                for (let i = 0; i < pointCount; i++) {
+                    const p1 = points[i];
+                    p1.x += p1.vx;
+                    p1.y += p1.vy;
+
+                    if (p1.x < 0 || p1.x > width) p1.vx *= -1;
+                    if (p1.y < 0 || p1.y > height) p1.vy *= -1;
+                    
+                    for (let j = i + 1; j < pointCount; j++) {
+                        const p2 = points[j];
+                        const distance = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+                        
+                        if (distance < maxDistance) {
+                            const opacity = (1 - distance / maxDistance) * 0.9;
+                            drawLine(p1, p2, opacity);
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            // Modal functionality
+            const tellMeFirstBtn = document.getElementById('tellMeFirstBtn');
+            const emailModal = document.getElementById('emailModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const notifyMeBtn = document.getElementById('notifyMeBtn');
+            const emailInput = document.getElementById('emailInput');
+            const formContainer = document.getElementById('formContainer');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Formsfree endpoint
+            const FORMSFREE_ENDPOINT = 'https://formspree.io/f/mwpnbvnb';
+
+            tellMeFirstBtn.addEventListener('click', () => {
+                emailModal.style.display = 'flex';
+                setTimeout(() => emailModal.classList.add('visible'), 10);
+                errorMessage.style.display = 'none'; // Hide error message on open
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                emailModal.classList.remove('visible');
+                setTimeout(() => {
+                    emailModal.style.display = 'none';
+                    formContainer.style.display = 'block';
+                    successMessage.style.display = 'none';
+                }, 500);
+            });
+
+            emailModal.addEventListener('click', (e) => {
+                if (e.target === emailModal) {
+                    emailModal.classList.remove('visible');
+                    setTimeout(() => {
+                        emailModal.style.display = 'none';
+                        formContainer.style.display = 'block';
+                        successMessage.style.display = 'none';
+                    }, 500);
+                }
+            });
+
+            notifyMeBtn.addEventListener('click', async () => {
+                const email = emailInput.value;
+                const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+                if (!gmailRegex.test(email)) {
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                errorMessage.style.display = 'none';
+                formContainer.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                try {
+                    const response = await fetch(FORMSFREE_ENDPOINT, {
+                        method: 'POST',
+                        body: new URLSearchParams({ email: email }),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    });
+
+                    if (response.ok) {
+                        console.log('Email successfully submitted to Formsfree!');
+                    } else {
+                        console.error('Submission failed.', response.statusText);
+                    }
+
+                } catch (error) {
+                    console.error('Network error during submission:', error);
+                } finally {
+                    setTimeout(() => {
+                        emailModal.classList.remove('visible');
+                        setTimeout(() => {
+                            emailModal.style.display = 'none';
+                            formContainer.style.display = 'block';
+                            successMessage.style.display = 'none';
+                            emailInput.value = '';
+                        }, 500);
+                    }, 2000);
+                }
+            });
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            animate();
+        };
+    </script>
+
 </body>
 </html>
